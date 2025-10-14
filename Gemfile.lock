@@ -81,6 +81,7 @@ GEM
       msgpack (~> 1.2)
     brakeman (7.1.0)
       racc
+    bson (5.1.1)
     builder (3.3.0)
     concurrent-ruby (1.3.5)
     connection_pool (2.5.4)
@@ -90,12 +91,48 @@ GEM
       irb (~> 1.10)
       reline (>= 0.3.8)
     dotenv (3.1.8)
+    dotenv-rails (3.1.8)
+      dotenv (= 3.1.8)
+      railties (>= 6.1)
     drb (2.2.3)
     ed25519 (1.4.0)
     erb (5.1.1)
     erubi (1.13.1)
     globalid (1.3.0)
       activesupport (>= 6.1)
+    google-protobuf (4.32.1)
+      bigdecimal
+      rake (>= 13)
+    google-protobuf (4.32.1-aarch64-linux-gnu)
+      bigdecimal
+      rake (>= 13)
+    google-protobuf (4.32.1-aarch64-linux-musl)
+      bigdecimal
+      rake (>= 13)
+    google-protobuf (4.32.1-x86_64-linux-gnu)
+      bigdecimal
+      rake (>= 13)
+    google-protobuf (4.32.1-x86_64-linux-musl)
+      bigdecimal
+      rake (>= 13)
+    googleapis-common-protos-types (1.22.0)
+      google-protobuf (~> 4.26)
+    grpc (1.75.0)
+      google-protobuf (>= 3.25, < 5.0)
+      googleapis-common-protos-types (~> 1.0)
+    grpc (1.75.0-aarch64-linux-gnu)
+      google-protobuf (>= 3.25, < 5.0)
+      googleapis-common-protos-types (~> 1.0)
+    grpc (1.75.0-aarch64-linux-musl)
+      google-protobuf (>= 3.25, < 5.0)
+      googleapis-common-protos-types (~> 1.0)
+    grpc (1.75.0-x86_64-linux-gnu)
+      google-protobuf (>= 3.25, < 5.0)
+      googleapis-common-protos-types (~> 1.0)
+    grpc (1.75.0-x86_64-linux-musl)
+      google-protobuf (>= 3.25, < 5.0)
+      googleapis-common-protos-types (~> 1.0)
+    grpc-tools (1.75.0)
     i18n (1.14.7)
       concurrent-ruby (~> 1.0)
     io-console (0.8.1)
@@ -104,6 +141,8 @@ GEM
       rdoc (>= 4.0.0)
       reline (>= 0.4.2)
     json (2.15.1)
+    jwt (3.1.2)
+      base64
     kamal (2.7.0)
       activesupport (>= 7.0)
       base64 (~> 0.2)
@@ -129,6 +168,13 @@ GEM
     marcel (1.1.0)
     mini_mime (1.1.5)
     minitest (5.26.0)
+    mongo (2.21.3)
+      base64
+      bson (>= 4.14.1, < 6.0.0)
+    mongoid (9.0.8)
+      activemodel (>= 5.1, < 8.1, != 7.0.0)
+      concurrent-ruby (>= 1.0.5, < 2.0)
+      mongo (>= 2.18.0, < 3.0.0)
     msgpack (1.8.0)
     net-imap (0.5.12)
       date
@@ -171,6 +217,8 @@ GEM
       stringio
     puma (7.0.4)
       nio4r (~> 2.0)
+    pundit (2.5.2)
+      activesupport (>= 3.0.0)
     racc (1.8.1)
     rack (3.2.3)
     rack-session (2.1.1)
@@ -290,8 +338,14 @@ DEPENDENCIES
   bootsnap
   brakeman
   debug
+  dotenv-rails
+  grpc
+  grpc-tools
+  jwt
   kamal
+  mongoid
   puma (>= 5.0)
+  pundit
   rails (~> 8.0.3)
   rubocop-rails-omakase
   thruster
