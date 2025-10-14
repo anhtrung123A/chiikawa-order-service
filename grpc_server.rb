@@ -1,21 +1,22 @@
+require_relative "config/environment"
 require "grpc"
 require_relative "lib/order"
-require "securerandom"
-
+require_relative "app/models/user_order"
+require_relative "app/models/order_item"
 class OrderServer < Order::OrderService::Service
   def checkout(request, _call)
+    order = UserOrder.new
+    order_items = []
+    order.user_id = request.user_id
+
     request.items.each do |item|
-      puts " - #{item.name} (#{item.quantity} x #{item.price})"
+      order_items << OrderItem.new(product_id: item.product_id, name: item.name,
+      quantity: item.quantity, price: item.price, image: item.image)
     end
-
-    # Here you could:
-    #  - Save order to MongoDB/Postgres
-    #  - Check stock from ProductService
-    #  - Deduct inventory
-    #  - Handle payment
-
+    order.order_items = order_items
+    order.save
     Order::CheckoutResponse.new(
-      order_id: SecureRandom.uuid,
+      order_id: order.id.to_s,
       status: "success",
       message: "Order created successfully"
     )
