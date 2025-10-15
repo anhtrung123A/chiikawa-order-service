@@ -14,6 +14,7 @@ module Order
       self.service_name = 'order.OrderService'
 
       rpc :Checkout, ::Order::CheckoutRequest, ::Order::CheckoutResponse
+      rpc :GetOrderDetail, ::Order::GetOrderDetailRequest, ::Order::GetOrderDetailResponse
     end
 
     Stub = Service.rpc_stub_class

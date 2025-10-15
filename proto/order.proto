@@ -4,6 +4,7 @@ package order;
 
 service OrderService {
   rpc Checkout (CheckoutRequest) returns (CheckoutResponse);
+  rpc GetOrderDetail (GetOrderDetailRequest) returns (GetOrderDetailResponse);
 }
 
 message CartItem {
@@ -28,12 +29,14 @@ message CheckoutResponse {
 
 message GetOrderDetailRequest {
   string order_id = 1;
+  int32 user_id = 2;
 }
 
 message GetOrderDetailResponse {
   string order_id = 1;
-  int32 user_id = 2;
-  repeated CartItem items = 3;
-  string status = 4;
-  string created_at = 5;
+  string promotion_code = 2;
+  int32 user_id = 3;
+  repeated CartItem items = 4;
+  string status = 5;
+  string created_at = 6;
 }
