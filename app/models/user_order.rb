@@ -5,6 +5,7 @@ class UserOrder
 
   field :user_id, type: Integer
   field :status, type: String, default: "pending"
+  field :promotion_code, type: String, default: nil
   field :confirmed_at, type: Date, default: nil
   field :canceled_at, type: Date, default: nil
   embeds_many :order_items, cascade_callbacks: true

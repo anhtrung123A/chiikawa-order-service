@@ -8,7 +8,7 @@ class OrderServer < Order::OrderService::Service
     order = UserOrder.new
     order_items = []
     order.user_id = request.user_id
-
+    order.promotion_code = request.promotion_code
     request.items.each do |item|
       order_items << OrderItem.new(product_id: item.product_id, name: item.name,
       quantity: item.quantity, price: item.price, image: item.image)
