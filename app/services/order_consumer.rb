@@ -20,7 +20,14 @@ class OrderConsumer
       when "created"
         puts "Received order created event: #{data.inspect}"
       when "paid"
-        puts "Received order paid event: #{data.inspect}"
+        payload = data["payload"]
+        order = UserOrder.where(id: payload["order_id"]).first
+        if order != nil
+          payment = Payment.new(payload["payment"])
+          order.paid!
+          order.payment = payment
+          puts JSON.pretty_generate(order.as_json)
+        end
       when "cancelled"
         puts "Received order cancelled event: #{data.inspect}"
       else

@@ -8,7 +8,10 @@ class UserOrder
   field :promotion_code, type: String, default: nil
   field :confirmed_at, type: Date, default: nil
   field :canceled_at, type: Date, default: nil
+  field :payment_id, type: String, default: nil
+  field :paid_at, type: Date, default: nil
   embeds_many :order_items, cascade_callbacks: true
+  embeds_one :payment, cascade_callbacks: false
 
   index({ user_id: 1 })
 
@@ -19,10 +22,14 @@ class UserOrder
   def total_price
     order_items.sum { |item| item.price.to_f * item.quantity.to_i }
   end
-  STATUSES = %w[pending canceled confirmed]
+  STATUSES = %w[pending canceled confirmed paid]
 
   def pending!
     update(status: "pending")
+  end
+
+  def paid!
+    update(status: "paid")
   end
 
   def canceled!
@@ -43,5 +50,9 @@ class UserOrder
 
   def confirmed?
     status == "confirmed"
+  end
+
+  def paid?
+    status == "paid"
   end
 end

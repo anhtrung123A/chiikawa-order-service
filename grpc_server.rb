@@ -39,6 +39,13 @@ class OrderServer < Order::OrderService::Service
       )
     end
 
+    if order.paid?
+      raise GRPC::BadStatus.new_status_exception(
+        GRPC::Core::StatusCodes::ALREADY_EXISTS,
+        "Already paid"
+      )
+    end
+
     items = order.order_items.map do |item|
       Order::CartItem.new(
         product_id: item.product_id,
