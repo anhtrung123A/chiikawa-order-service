@@ -15,10 +15,19 @@ message CartItem {
   int32 quantity = 5;
 }
 
+message DeliveryAddress {
+  string country = 1;
+  string province = 2;
+  string city = 3;
+  string location_detail = 4;
+  string phone_number = 5;
+  string recipient_name = 6;
+}
 message CheckoutRequest {
   int32 user_id = 1;
   repeated CartItem items = 2;
   string promotion_code = 3;
+  DeliveryAddress delivery_address = 4;
 }
 
 message CheckoutResponse {
