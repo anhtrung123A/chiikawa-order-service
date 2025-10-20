@@ -10,11 +10,16 @@ class OrderServer < Order::OrderService::Service
     order.user_id = request.user_id
     order.promotion_code = request.promotion_code
     puts JSON.pretty_generate(request.delivery_address)
+    delivery_address = request.delivery_address
+    address = DeliveryAddress.new(country: delivery_address.country, province: delivery_address.province,
+                                  city: delivery_address.city, location_detail: delivery_address.location_detail,
+                                  phone_number: delivery_address.phone_number, recipient_name: delivery_address.recipient_name)
     request.items.each do |item|
       order_items << OrderItem.new(product_id: item.product_id, name: item.name,
       quantity: item.quantity, price: item.price, image: item.image)
     end
     order.order_items = order_items
+    order.delivery_address = address
     order.save
     Order::CheckoutResponse.new(
       order_id: order.id.to_s,

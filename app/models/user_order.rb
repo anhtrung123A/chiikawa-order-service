@@ -12,7 +12,9 @@ class UserOrder
   field :paid_at, type: Date, default: nil
   embeds_many :order_items, cascade_callbacks: true
   embeds_one :payment, cascade_callbacks: false
+  embeds_one :delivery_address, cascade_callbacks: true
 
+  accepts_nested_attributes_for :delivery_address
   index({ user_id: 1 })
 
   accepts_nested_attributes_for :order_items, allow_destroy: true
