@@ -1,4 +1,4 @@
-class CartPolicy
+class UserOrderPolicy
   attr_reader :user, :order
 
   def initialize(user, order)
