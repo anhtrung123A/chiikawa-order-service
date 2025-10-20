@@ -17,6 +17,7 @@ gem "pundit"
 gem "dotenv-rails"
 gem 'grpc'
 gem 'grpc-tools'
+gem "rack-cors"
 gem "bunny"
 gem "foreman"
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
